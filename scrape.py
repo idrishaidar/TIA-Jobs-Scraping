@@ -118,12 +118,15 @@ def get_post_search_result(search_keyword):
     soup = BeautifulSoup(html_text, 'lxml')
 
     # to store the job posts
-    col_names = [
-        'URL', 'Title', 'Company', 'Industry', 'Size', 'Posted at', 
-        'Location', 'Job Type', 'Experience Required',
-        'Responsibilities', 'Requirements', 'Skills Required', 'Raw Details', 'Scraped at'
-        ]
-    df_job_posts = pd.DataFrame(columns=col_names)
+    try:
+        df_job_posts = pd.read_csv('jobs.csv')
+    except FileNotFoundError:
+        col_names = [
+            'URL', 'Title', 'Company', 'Industry', 'Size', 'Posted at', 
+            'Location', 'Job Type', 'Experience Required',
+            'Responsibilities', 'Requirements', 'Skills Required', 'Raw Details', 'Scraped at'
+            ]
+        df_job_posts = pd.DataFrame(columns=col_names)
 
     # get job posts
     job_posts = soup.find_all('article', {'data-cy': 'job-result'})
