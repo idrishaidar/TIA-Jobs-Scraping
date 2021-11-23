@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from pandas.core.algorithms import mode
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime
@@ -73,7 +72,7 @@ def get_post_search_result(search_keyword):
         company_industry = company_info[1].text
         company_size = company_info[2].text
 
-        # append dataframe
+        # prepare new row to append the dataframe
         new_row = {
             'URL': current_post_url, 'Title': job_title,
             'Company': company_name, 'Industry': company_industry,
